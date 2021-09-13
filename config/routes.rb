@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
-  get 'static_pages/help'
-  get 'static_pages/contact'
+  root "static_pages#home"
+  get "static_pages/help"
+
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
-  resources :users, only: %i(new create)
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :users, only: %i(new create show)
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end
